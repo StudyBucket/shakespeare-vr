@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Romeo und Julia - Balkonszene</title>
+    <meta name="description" content="aframe-boilerplate">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+	<link rel="stylesheet" href="css/main.css">
+	
+      <style type="text/css">
+        
+     #spot-button {
+        position: fixed;
+        top: calc(10% - 6em);
+        left: calc(10% - 11em);
+        width: 4em;
+        height: 2em;
+        z-index: 10;
+        border: 2px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+      }
+
+      #Curtains-button {
+        position: fixed;
+        top: calc(15% - 6em);
+        left: calc(10% - 11em);
+        width: 6.5em;
+        height: 2em;
+        z-index: 10;
+        border: 2px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+      }
+      
+      #camera1-button {
+        position: fixed;
+        top: calc(20% - 6em);
+        left: calc(10% - 11em);
+        width: 10em;
+        height: 2em;
+        z-index: 10;
+        border: 2px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+      }
+
+ #camera2-button {
+        position: fixed;
+        top: calc(25% - 6em);
+        left: calc(10% - 11em);
+        width: 10em;
+        height: 2em;
+        z-index: 10;
+        border: 2px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+      }
+      
+      #camera3-button {
+        position: fixed;
+        top: calc(30% - 6em);
+        left: calc(10% - 11em);
+        width: 10em;
+        height: 2em;
+        z-index: 10;
+        border: 2px white solid;
+        background: none;
+        color: white;
+        font-weight: bold;
+      }
+
+
+
+
+      .button:hover {
+        background-color: white;
+        color: black;
+      }
+
+      #scene {
+        z-index: 0;
+      }
+    </style>
+</head>
+  
+  
+  
+<body>
+
+<!--Preloader-->
+<div id="wrapper">
+			<div id="timer"></div>
+
+			<div class="timer-section section-left"><img src="assets/bilder/titelbild1.png" width="100%" height="100%"></div>
+            <div class="timer-section section-right"><img src="assets/bilder/titelbild2.png" width="100%" height="100%"></div>
+
+		</div>
+    
+<!--Scene-->
+
+     <a-scene id="scene">
+      <a-assets>
+	  	<!--Texturen-->
+		<!--Bühnenhintergrund-->
+          <img id="background" src="assets/">
+		<!--Boden-Vorsaal-->
+		 <img id="boden" src="assets/materials/boden.jpg">
+		<!--Plakate-Vorsaal-->
+		 <img id="plakat1" src="assets/materials/plakat1.jpg">
+		 <img id="plakat2" src="assets/materials/plakat2.jpg">
+		 <img id="plakat3" src="assets/materials/plakat3.jpg">
+		 <img id="plakat4" src="assets/materials/plakat4.jpg">
+		 <img id="plakat5" src="assets/materials/plakat5.jpg">
+		
+		  
+	  <!--Objekte-->
+	    <!--Tür-Objekt-->
+          <a-asset-item id="door-obj" src="assets/objects/Door/door.obj"></a-asset-item>
+        <!--Tür-Material-->
+            <a-asset-item id="door-mtl" src="assets/objects/Door/door.mtl"></a-asset-item>
+      <!--Balkon-->
+          <a-asset-item id="balkon-obj" src="assets/objects/Balkon/balkon.obj"></a-asset-item>
+          <a-asset-item id="balkon-mtl" src="assets/objects/Balkon/balkon.mtl"></a-asset-item> 
+       <!--Sitze-->		  
+          <a-asset-item id="sitze-obj" src="assets/objects/Sitze/Stuhl.obj"></a-asset-item>
+	      <a-asset-item id="sitze-mtl" src="assets/objects/Sitze/Stuhl.mtl"></a-asset-item>
+	  <!--RomeoKopf-Objekt-->
+	      <a-asset-item id="romeokopf-obj" src="assets/objects/Romeo/romeoleftarm.obj"></a-asset-item>      
+	   <!--RomeoKopf-Material-->
+	   <a-asset-item id="romeokopf-mtl" src="assets/objects/Romeo/romeoleftarm.mtl"></a-asset-item>
+      <!--RomeolinkerArm-Objekt-->   
+	      <a-asset-item id="romeolinkerarm-obj" src="assets/objects/Romeo/romeoleftarm.obj"></a-asset-item>
+      <!--RomeorechterArm-Objekt-->   
+	      <a-asset-item id="romeorechterarm-obj" src="assets/objects/Romeo/romeorightarm.obj"></a-asset-item>
+      <!--RomeolinkerArm-Material--> 
+	      <a-asset-item id="romeolinkerarm-mtl" src="assets/objects/Romeo/romeoleftarm.mtl"></a-asset-item>
+      <!--RomeorechterArm-Material--> 
+	      <a-asset-item id="romeorechterarm-mtl" src="assets/objects/Romeo/romeorightarm.mtl"></a-asset-item>
+       <!--Romeoleg-Objekt-->   
+	       <a-asset-item id="romeoleg-obj" src="assets/objects/Romeo/romeoleftleg.obj"></a-asset-item>
+       <!--Romeoleg-Material--> 
+	       <a-asset-item id="romeoleg-mtl" src="assets/objects/Romeo/romeoleftleg.mtl"></a-asset-item>
+       <!--Romeobody-Objekt-->  
+	       <a-asset-item id="romeobody-obj" src="assets/objects/Romeo/romeo-body.obj"></a-asset-item>
+       <!--Romeobody-Material-->
+	       <a-asset-item id="romeobody-mtl" src="assets/objects/Romeo/romeo-body.mtl"></a-asset-item> 
+       	                
+	 </a-assets>
+	 
+		  
+	  <!--Vorsaal-->
+	
+
+	  
+	  
+	  <!--Tür-rechts-->
+	   <a-entity id="tür-rechts" obj-model="obj: #door-obj; mtl: #door-mtl" position="7.5 7 20" rotation="0 90 0" scale="0.4 0.5 0.5">
+	  <a-animation attribute="rotation" from="0 90 0" to="0 180 0" dur="20000">
+      </a-animation>
+      </a-entity>
+       <!--Tür-links-->
+	   <a-entity id="tür-links" obj-model="obj: #door-obj; mtl: #door-mtl" position="-7.5 7 20" rotation="0 -90 0" scale="0.4 0.5 0.5">
+	   <a-animation attribute="rotation" from="0 -90 0" to="0 -180 0" dur="20000">
+       </a-animation>
+      </a-entity> 
+
+	   
+
+
+	 
+	 
+      
+
+     
+     
+	  <!--Objekte im Theatersaal-->
+      <!--Balkon-->  
+      <a-entity id="balkon" obj-model="obj: #balkon-obj; mtl: #balkon-mtl" position="10 2.215 -16" rotation="0 204 0">
+      </a-entity>
+      <!--Sitze-->
+      <a-entity id="sitze" obj-model="obj: #sitze-obj; mtl: #sitze-mtl" position="2.8 0 -1.28" rotation="0 270 0" >
+      </a-entity>
+      <!--Romeo-Body-->
+      <a-entity id="romeobody" obj-model="obj: #romeobody-obj; mtl: #romeobody-mtl" position="0.000 2.918 -12.5" rotation="" scale="0.200 0.200 0.200">
+      </a-entity>
+      <!--Romeo-Arm-Left-->
+      <a-entity id="romeoarmleft" obj-model="obj: #romeolinkerarm-obj; mtl: #romeolinkerarm-mtl" position="0.000 2.918 -12.5" rotation="" scale="0.200 0.200 0.200">
+      </a-entity>
+      <!--Romeo-Arm-Right-->
+      <a-entity id="romeoarmright" obj-model="obj: #romeorechterarm-obj; mtl: #romeorechterarm-mtl" position="-0.05 2.918 -12.5"  scale="0.200 0.200 0.200" rotation="0 ">
+      </a-entity>
+      <!--Romeo-Leg-Left-->
+      <a-entity id="romeolegleft" obj-model="obj: #romeoleg-obj; mtl: #romeoleg-mtl" position="0.000 2.918 -12.5" rotation="" scale="0.200 0.200 0.200">
+      </a-entity>
+      <!--Romeo-Leg-Right-->
+      <a-entity id="romeolegright" obj-model="obj: #romeoleg-obj; mtl: #romeoleg-mtl" position="-0.313 2.918 -12.5" rotation="" scale="0.200 0.200 0.200">
+      </a-entity>                       
+	 
+	  <!--Baumstamm-->
+      <a-cylinder color="#331a00" height="5" radius="0.5" position="-7 2.18 -13.3" ></a-cylinder>
+	  <!--Blätter-->
+      <a-box height="1.5" depth="1.5" width="3.5" color="#003300" position="-7 5.421 -13.3" id="Tree1A" >
+      </a-box>
+      <a-box height="1" depth="1" width="2.5" color="#003300" position="-7 6.421 -13.3" id="Tree1B">
+      </a-box>
+      <a-box height="1" depth="1" width="2.5" color="#003300" position="-7 4.421 -13.3" id="Tree1C">
+      </a-box>
+      <a-box height="1.5" depth="3" width="2" color="#003300" position="-7 5.421 -13.3" id="Tree1D">
+      </a-box>
+      <!--einzelne Blätter-->
+      <a-box height="0.1" depth="0.3" width="0.3" color="#003300" position="-7 5.421 -14.2" id="Leaf1">
+      </a-box>
+      <a-box height="0.1" depth="0.3" width="0.3" color="#003300" position="-6.5 5.421 -12.4" id="Leaf2">
+      </a-box>
+      <a-box height="0.1" depth="0.3" width="0.3" color="#003300" position="-8 5.421 -14" id="Leaf3">
+      </a-box>
+      <a-box height="0.1" depth="0.3" width="0.3" color="#003300" position="-5.5 5.421 -13.3" id="Leaf4">
+      </a-box>
+   
+     <!--Licht-->
+      <!--Spot1-->     
+      <a-light id="the_spot" type="spot" color="#FFF" position="0 10 0" intensity="0" >
+      </a-light>
+     
+      <!--Allgemeines Licht-->
+      <a-light id="BasicLight" type="ambient" color="#FFF" intensity="1" position="0 0 0">
+      </a-light>
+	  
+	  
+       <!--Kamera 0-->
+      <a-entity position="0.7 3 39.315"  >
+        <a-camera id="camera0" active="true"> </a-camera>
+        <a-animation attribute="position" to="0.7 3 6" delay="20000" dur="10000"></a-animation>   
+      </a-entity>
+      
+      <!--Kamera 1-->
+      
+       <a-entity position="0.7 3 6"  >
+        <a-camera id="camera1" active="false"> </a-camera>
+        <a-animation attribute="active" to="true" delay="30000"></a-animation>   
+      </a-entity>
+      
+       <!--Kamera 2-->
+      <a-entity position="7.1 7.2 -15.4" rotation="0 120 0" >
+        <a-camera id="camera2" active="false"></a-camera>  
+      </a-entity>
+      
+      <!--Kamera 3-->
+      <a-entity position="0.000 2.918 -12.5" rotation="0 -70 0"  >
+        <a-camera id="camera3" active="false"></a-camera>  
+      </a-entity>
+      
+      <!--Kamera 4-->
+      <a-entity position="0.7 10 6"  >
+        <a-camera id="camera4" active="false"></a-camera>  
+      </a-entity>
+      
+      <!--Kamera 5-->
+       <a-entity position="0.7 10 6"  >
+        <a-camera id="camera5" active="false"></a-camera>  
+      </a-entity>
+ 
+    <!--Buttons-->
+
+    <button class="button" id="Curtains-button">Vorhänge</button>
+
+    <button class="button" id="spot-button">Spot</button>
+    
+    <button class="button" id="camera1-button">Perspektive 1</button>
+    
+    <button class="button" id="camera2-button">Perspektive 2</button>
+    
+    <button class="button" id="camera3-button">Perspektive 3</button>
+    
+    
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript">
+        $('#Curtains-button').click(function(){
+          console.log('click!');
+          animateCurtains();
+          PlayApplauseSound();
+          RomeoKneen(); 
+        });
+
+        $('#spot-button').click(function(){
+          console.log('click!');
+          animateSpot();
+          AnimationBaum();
+          AnimationLeveas();
+                });
+        
+          $('#camera1-button').click(function(){
+          console.log('click!');
+          Kamera1On();
+        });
+        
+        $('#camera2-button').click(function(){
+          console.log('click!');
+          Kamera2On();
+        });
+        
+        $('#camera3-button').click(function(){
+          console.log('click!');
+          Kamera3On();
+        });
+        
+        $('#applause-button').click(function(){
+          console.log('click!');
+          PlayApplauseSound();
+        });
+
+
+    </script>
+	
+  </body>
+</html>
+
+
+
+<!-- PLEASE JUST IGNORE THAT
+var animation = document.createElement("a-animation");
+            animation.setAttribute("attribute","position");
+            animation.setAttribute("to",this.data.position);
+            animation.setAttribute("dur","1000");
+            animation.setAttribute("repeat","0");
+            this.data.target.appendChild(animation);
+-->
