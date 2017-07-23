@@ -4,6 +4,61 @@
 
 	<div class="list-group-item disabled">
 		<h4 class="list-group-item-heading"> 
+		Characters
+		</h4>
+	</div> 
+
+	<ng-container *ngFor="let char of characters">
+		<div class="list-group-item" *ngIf="char.options.ctrl == true">
+			<h4 class="list-group-item-heading">
+				<span class="glyphicon glyphicon-user"></span>
+				{{char.name}} 
+				<small>
+					<input 	style="display: inline;" 
+									type="checkbox" 
+									[attr.name]="char.uid" 
+									[attr.id]="char.uid" 
+									[checked]="char.options.toggled" 
+									(change)="char.options.toggled = !char.options.toggled">
+				</small>
+
+				<ul>
+					<ng-container *ngFor="let f of char.figures">
+							<li>
+								<label>
+									{{ f.title }} 
+									<input 	style="display: inline;" 
+													type="radio" 
+													[attr.name]="char.uid+'figure'"
+													[value]="f.id" 
+													(change)="f.active = !f.active"
+													[checked]="f.active"
+									>
+								</label>
+							</li>
+					</ng-container>
+				</ul>
+			</h4>
+			</div>
+	</ng-container>
+
+	<div class="list-group-item disabled">
+		<h4 class="list-group-item-heading"> 
+		Sounds
+		</h4>
+	</div>
+	<div class="list-group-item">
+		<ol>
+				<ng-container *ngFor="let s of sounds">
+					<span 	class="badge badge-pill badge-default"
+									(click)="playSound(s.src)"
+					>{{s.title}}</span>			
+				</ng-container>
+			</ol>	
+	</div>
+
+	<div class="list-group-item disabled">
+		<h4 class="list-group-item-heading"> 
 		Set Items
 		</h4>
 	</div>
@@ -11,11 +66,86 @@
 	<ng-container *ngFor="let o of drpo">
 		<div class="list-group-item" *ngIf="o.options.ctrl == true">
 			<h4 class="list-group-item-heading">
-				<span class="glyphicon glyphicon-picture"></span>
-				{{o.title}} <small>({{o.options.toggled}})</small>
+				<ng-container [ngSwitch]="o.type">	
+					<span 	*ngSwitchDefault 
+									class="glyphicon glyphicon-picture"></span>
+					<span 	*ngSwitchCase="'camera'" 
+									class="glyphicon glyphicon-facetime-video"></span>
+					<span 	*ngSwitchCase="'light'" 
+									class="glyphicon glyphicon-lamp"></span>  
+				</ng-container>
+				{{o.title}} 
+				<small>
+					<input 	style="display: inline;" 
+									type="checkbox" 
+									[attr.name]="o.uid" 
+									[attr.id]="o.uid" 
+									[checked]="o.options.toggled" 
+									(change)="o.options.toggled = !o.options.toggled">
+
+					<input 	*ngIf="o.type == 'camera'"
+									style="display: inline;" 
+									type="radio" 
+									name="cameraSwitch" 
+									[attr.value]="o.uid" 
+									(change)="o.options.active = !o.options.active"
+									[attr.checked]="o.options.active" >
+				</small>
+				
+
+				<ng-container *ngIf="o.type == 'light'">
+						<input 	[attr.id]="o.uid+'-range'"
+										type="range" 
+										min="0" 
+										max="5" 
+										step="0.25"
+										[value]="o.light.intensity"
+										(change)="o.light.intensity = $event.target.value">
+
+						<label style="color: #ffffff; background-color: lightgrey;">W <input 	style="display: inline;" 
+										type="radio" 
+										[attr.name]="o.uid+'-color'"
+										value="#ffffff" 
+										(change)="o.light.color = $event.target.value"></label>
+
+						<label style="color: #ffe162; background-color: lightgrey;">Y <input 	style="display: inline;" 
+										type="radio" 
+										[attr.name]="o.uid+'-color'"
+										value="#ffe162" 
+										(change)="o.light.color = $event.target.value"></label>
+
+						<label style="color: #df1a42; background-color: lightgrey;">R <input 	style="display: inline;" 
+										type="radio" 
+										[attr.name]="o.uid+'-color'"
+										value="#df1a42" 
+										(change)="o.light.color = $event.target.value"></label>
+
+						<label style="color: #010B65; background-color: lightgrey;">B <input 	style="display: inline;" 
+										type="radio" 
+										[attr.name]="o.uid+'-color'"
+										value="#010B65" 
+										(change)="o.light.color = $event.target.value"></label>
+
+						<label style="color: #6bfe00; background-color: lightgrey;">G <input 	style="display: inline;" 
+										type="radio" 
+										[attr.name]="o.uid+'-color'"
+										value="#6bfe00" 
+										(change)="o.light.color = $event.target.value"></label>
+				</ng-container>
+
+				<ng-container *ngIf="o.animation != null">
+						<ol *ngFor="let a of o.animation">
+								<label>{{a.title}} <input 	style="display: inline;" 
+									type="checkbox" 
+									[attr.name]="o.uid+'-'+a.title" 
+									[attr.id]="o.uid+'-'+a.title" 
+									[checked]="a.state" 
+									(change)="a.state = !a.state"></label>	
+						</ol>
+				</ng-container>
+
 			</h4>
-			<input type="checkbox" [attr.name]="o.uid" [attr.id]="o.uid" [attr.checked]="o.options.toggled">
-		</div>
+			</div>
 	</ng-container>
 	
 	<!--

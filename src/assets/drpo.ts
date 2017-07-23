@@ -28,6 +28,23 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "scale": [
     { "x": null, "y": null, "z": null },
     { "x": null, "y": null, "z": null },
+  ],
+  "animation": [
+    { 
+      "title": "animateOpen",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "width", "to": "5", "dur": "4000" }
+      ]
+    }, { 
+      "title": "animateClose",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "width", "to": "24", "dur": "6000" }
+      ]
+    }
   ]
 },
 {
@@ -60,6 +77,15 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "scale": [
     { "x": null, "y": null, "z": null },
     { "x": null, "y": null, "z": null },
+  ],
+  "animation": [
+    { 
+      "title": "animateOpen", 
+      "state": false,
+      "changes": [
+        { "attribute": "width", "to": "5", "dur": "5000" }
+      ]
+    }
   ]
 },
 {
@@ -129,7 +155,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
 {
   "uid": "wall-front",
   "type": "box",
-  "title": "The left theatre wall.",
+  "title": "The background",
   "comment": null,
   "options": {
     "toggled": true,
@@ -547,7 +573,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "type": "plane",
   "title": "A Poster.",
   "comment": null,
-  "options": { "toggled": true, "ctrl": true, "intesity": null },
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
   "form": { "width":  "","height": "", "depth":  "",},
   "appearance": {
     "material": "materials/plakat1.jpg",
@@ -571,7 +597,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "type": "plane",
   "title": "Another Poster.",
   "comment": null,
-  "options": { "toggled": true, "ctrl": true, "intesity": null },
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
   "form": { "width":  "","height": "", "depth":  "",},
   "appearance": {
     "material": "materials/plakat2.jpg",
@@ -595,7 +621,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "type": "plane",
   "title": "Another Poster.",
   "comment": null,
-  "options": { "toggled": true, "ctrl": true, "intesity": null },
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
   "form": { "width":  "","height": "", "depth":  "",},
   "appearance": {
     "material": "materials/plakat3.jpg",
@@ -619,7 +645,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "type": "plane",
   "title": "Another Poster.",
   "comment": null,
-  "options": { "toggled": true, "ctrl": true, "intesity": null },
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
   "form": { "width":  "","height": "", "depth":  "",},
   "appearance": {
     "material": "materials/plakat4.jpg",
@@ -643,7 +669,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "type": "plane",
   "title": "Another Poster.",
   "comment": null,
-  "options": { "toggled": true, "ctrl": true, "intesity": null },
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
   "form": { "width":  "","height": "", "depth":  "",},
   "appearance": {
     "material": "materials/plakat5.jpg",
@@ -661,5 +687,162 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "scale": [
     { "x": "7", "y": "5", "z": "0" },
   ]
+},{
+  "uid": "balcony",
+  "type": "object",
+  "title": "The balcony",
+  "comment": "",
+  "options": { "toggled": true, "ctrl": false, "intesity": null },
+  "form": { "width":  null, "height": null,  "depth":  null, },
+  "appearance": { "mtl": "objects/Balkon/balkon.mtl", "obj": "objects/Balkon/balkon.obj", "color": "null" },
+  "position": [
+    { "x": "10", "y": "2.215", "z": "-16" }
+  ],
+  "rotation": [
+    { "x": "0", "y": "204", "z": "0"}
+  ],
+  "scale": [
+    { "x": null, "y": null, "z": null }
+  ]
+},{
+  "uid": "Chairs",
+  "type": "object",
+  "title": "Chairs",
+  "comment": null,
+  "options": {
+    "toggled": true,
+    "ctrl": true,
+    "intesity": null
+  },
+  "form": { "width":  null, "height": null,  "depth":  null, },
+  "appearance": { "mtl": "objects/Sitze/Stuhl.mtl", "obj": "objects/Sitze/Stuhl.obj", "color": "null" },
+  "position": [
+    { "x": "2.8", "y": "0", "z": "-1.28" }
+  ],
+  "rotation": [
+    { "x": "0", "y": "270", "z": "0" },
+  ],
+  "scale": [
+     { "x": null, "y": null, "z": null },
+  ]
+},{
+  "uid": "camera0",
+  "type": "camera",
+  "title": "Camera 0",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": true },
+  "position": [
+    { "x": "0.7", "y": "3", "z": "39.315"},
+  ],
+  "animation": [
+    { 
+      "title": "moveForward",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "position", "to": "0.7 3.0 -39.315", "dur": "10000", "delay": "30000" }
+      ]
+    }
+  ]  
+},{
+  "uid": "camera1",
+  "type": "camera",
+  "title": "Camera 1",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
+  "position": [
+    { "x": "0.7", "y": "3", "z": "6"},
+  ]
+},{
+  "uid": "camera2",
+  "type": "camera",
+  "title": "Camera 2",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
+  "position": [
+    { "x": "7.1", "y": "7.2", "z": "-15.4"},
+  ]
+},{
+  "uid": "camera3",
+  "type": "camera",
+  "title": "Camera 3",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
+  "position": [
+    { "x": "0", "y": "2.918", "z": "-12.5"},
+  ]
+},{
+  "uid": "camera4",
+  "type": "camera",
+  "title": "Camera 4",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
+  "position": [
+    { "x": "0.7", "y": "10", "z": "6"},
+  ]
+},{
+  "uid": "camera5",
+  "type": "camera",
+  "title": "Camera 5",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
+  "position": [
+    { "x": "0.7", "y": "10", "z": "6"},
+  ]
+},{
+  "uid": "the_spot",
+  "type": "light",
+  "title": "Spot Light",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true },
+  "position": [
+    { "x": "0", "y": "10", "z": "0"},
+  ],
+  "light": {
+    "intensity": "1.0", 
+    "color": "#FFF",
+    "type": "spot"
+  }
+},{
+  "uid": "the_ambient",
+  "type": "light",
+  "title": "Ambient Light",
+  "comment": "null",
+  "options": { "toggled": true, "ctrl": true },
+  "position": [
+    { "x": "0", "y": "0", "z": "0"},
+  ],
+  "light": {
+    "intensity": "1.0", 
+    "color": "#FFF",
+    "type": "ambient"
+  },
+},{
+  "uid": "julia",
+  "type": "object",
+  "title": "The balcony",
+  "comment": "",
+  "options": { "toggled": true, "ctrl": false },
+  "form": { "width":  null, "height": null,  "depth":  null, },
+  "appearance": { "mtl": "objects/Julia/julia.mtl", "obj": "objects/Julia/julia.obj", "color": "null" },
+  "position": [
+    { "x": "5.987", "y": "7.506", "z": "-11.471" }
+  ],
+  "rotation": [
+    { "x": "0", "y": "-53.858", "z": "0"}
+  ],
+  "scale": [
+    { "x": "0.200", "y": "0.200", "z": "0.200" }
+  ]
 }];
+
+
+
+
+
+
+
+
+
+
 

@@ -1,26 +1,43 @@
 <h2>Scene Title</h2>
 <hr>
+
+    <!--Preloader-->
+    <div id="wrapper" #preloader>
+        <div id="timer"></div>
+        <div class="timer-section section-left">
+            <img src="assets/bilder/titelbild1.png" width="100%" height="100%">
+        </div>
+        <div class="timer-section section-right">
+            <img src="assets/bilder/titelbild2.png" width="100%" height="100%">
+        </div>
+    </div>
+
   <a-scene embedded id="scene" style="height: 100%;" #one>
     <a-assets> 
         <ng-container *ngFor="let o of drpo">
-          <ng-container *ngIf="o.options.toggled == true">
-            <img *ngIf="o.appearance.material" 
-                  [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.material">
+          <ng-container *ngIf="o.options.toggled == true && o.appearance != null">
+            <ng-container *ngIf="o.appearance.material">
+                <img [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.material">
+            </ng-container>
+            <ng-container *ngIf="o.appearance.obj">
+                <a-asset-item [id]="o.uid+'-obj'" [attr.src]="'../../assets/'+o.appearance.obj"></a-asset-item>
+                <a-asset-item [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.mtl"></a-asset-item> 
+            </ng-container>
           </ng-container>   
         </ng-container>
-        <!--Balkon-->
-         <!--Balkon-Objekt-->     <a-asset-item id="balkon-obj" src="../../assets/objects/Balkon/balkon.obj"></a-asset-item>
-         <!--Balkon-Material-->   <a-asset-item id="balkon-mtl" src="../../assets/objects/Balkon/balkon.mtl"></a-asset-item>      
-         <!--Stuehle-Objekt-->    <a-asset-item id="sitze-obj" src="../../assets/objects/Sitze/Stuhl.obj"></a-asset-item>
-         <!--Stuehle-Material-->  <a-asset-item id="sitze-mtl" src="../../assets/objects/Sitze/Stuhl.mtl"></a-asset-item>
-         <!--Romeo-Objekt-->      <a-asset-item id="romeo-obj" src="../../assets/objects/Romeo/romeo.obj"></a-asset-item>
-         <!--Romeo-Material-->    <a-asset-item id="romeo-mtl" src="../../assets/objects/Romeo/romeo.mtl"></a-asset-item>
-         <!--RomeoArm-Objekt-->   <a-asset-item id="romeoarm-obj" src="../../assets/objects/Romeo/romeoleftarm.obj"></a-asset-item>
-         <!--RomeoArm-Material--> <a-asset-item id="romeoarm-mtl" src="../../assets/objects/Romeo/romeoleftarm.mtl"></a-asset-item>
-         <!--Romeoleg-Objekt-->   <a-asset-item id="romeoleg-obj" src="../../assets/objects/Romeo/romeoleftleg.obj"></a-asset-item>
-         <!--Romeoleg-Material--> <a-asset-item id="romeoleg-mtl" src="../../assets/objects/Romeo/romeoleftleg.mtl"></a-asset-item>
-         <!--Romeobody-Objekt-->  <a-asset-item id="romeobody-obj" src="../../assets/objects/Romeo/romeo-body.obj"></a-asset-item>
-         <!--Romeobody-Material--><a-asset-item id="romeobody-mtl" src="../../assets/objects/Romeo/romeo-body.mtl"></a-asset-item>
+
+        <ng-container *ngFor="let char of characters">
+          <ng-container *ngIf="char.options.toggled == true">  
+            <ng-container *ngFor="let part of char.parts">
+                <ng-container *ngIf="part.appearance.obj">
+                <a-asset-item [id]="char.uid+'_'+part.title+'-obj'" [attr.src]="'../../assets/'+part.appearance.obj"></a-asset-item>
+                <a-asset-item [id]="char.uid+'_'+part.title+'-mtl'" [attr.src]="'../../assets/'+part.appearance.mtl"></a-asset-item> 
+            </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+       
          <!--Julia-Objekt-->      <a-asset-item id="julia-obj" src="../../assets/objects/Julia/julia.obj"></a-asset-item>
          <!--Julia-Material-->    <a-asset-item id="julia-mtl" src="../../assets/objects/Julia/julia.mtl"></a-asset-item>
          <!--Vorhand-IMG-->       <img id="curtain" src="../../assets/materials/curtain.jpg">
@@ -32,7 +49,8 @@
         <!-- TEST -->
 
         <ng-container *ngFor="let o of drpo">
-          <ng-container *ngIf="o.options.toggled == true">
+          <ng-container *ngIf="o.options.toggled == true">  
+
             <a-box *ngIf="o.type == 'box'"
                     [id]="o.uid"
                     [attr.width]="o.form.width"
@@ -44,7 +62,20 @@
                     [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                     [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                     >     
+                    <ng-container *ngIf="o.animation">
+                        <ng-container *ngFor="let a of o.animation">
+                            <ng-container *ngIf="a.state == true || a.autostart == true">
+                                <a-animation    *ngFor="let c of a.changes"
+                                                [attr.attribute]="c.attribute" 
+                                                [attr.to]="c.to" 
+                                                [attr.dur]="c.dur">
+                                                [attr.delay]="(c.delay != null ? c.delay : '0')"
+                                </a-animation>   
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
             </a-box>
+
 
             <a-plane *ngIf="o.type == 'plane'"
                     [id]="o.uid"
@@ -58,34 +89,107 @@
                     [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                     >     
             </a-plane>
+
+
+            <a-plane *ngIf="o.type == 'plane'"
+                    [id]="o.uid"
+                    [attr.width]="o.form.width"
+                    [attr.height]="o.form.height" 
+                    [attr.depth]="o.form.depth"  
+                    [attr.material]="'src: #'+o.uid+'-mtl'" 
+                    [attr.color]="o.appearance.color" 
+                    [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
+                    [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
+                    [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
+                    >     
+            </a-plane>
+
+
+            <a-entity   *ngIf="o.type == 'object'"
+                        [id]="o.uid"
+                        [attr.obj-model]="'obj: #' + o.uid + '-obj; mtl: #' + o.uid + '-mtl'" 
+                        [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
+                        [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
+                        [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.scale[0].z != null ? o.scale[0].z : '')"
+                    > 
+            </a-entity>
+
+
+            <a-entity   *ngIf="o.type == 'camera'"
+                        [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
+                    >
+                <a-camera   [id]="o.uid"
+                            [attr.active]="o.options.active"
+                    >
+                    <ng-container *ngIf="o.animation">
+                        <ng-container *ngFor="let a of o.animation">
+                            <ng-container *ngIf="a.state == true || a.autostart == true">
+                                <a-animation    *ngFor="let c of a.changes"
+                                                [attr.attribute]="c.attribute" 
+                                                [attr.to]="c.to" 
+                                                [attr.dur]="c.dur">
+                                                [attr.delay]="(c.delay != null ? c.delay : '0')"
+                                </a-animation>   
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </a-camera>   
+            </a-entity>
+
+            <a-light    *ngIf="o.type == 'light'"
+                        [id]="o.uid" 
+                        [attr.type]="o.light.type"
+                        [attr.color]="o.light.color"  
+                        [attr.intensity]="o.light.intensity"
+                        [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
+                    >
+            </a-light>
+
           </ng-container>
         </ng-container>
 
-    
+
+        <ng-container *ngFor="let char of characters">
+          <ng-container *ngIf="char.options.toggled == true">  
+            <ng-container *ngFor="let part of char.parts">
+                <a-entity   [id]="char.uid+'_'+part.title"
+                            [attr.obj-model]="'obj: #' + char.uid+'_'+part.title + '-obj; mtl: #' + char.uid+'_'+part.title + '-mtl'" 
+                            [attr.position]="(part.position[0].x != null ? part.position[0].x : '')+' '+(part.position[0].y != null ? part.position[0].y : '')+' '+(part.position[0].z != null ? part.position[0].z : '')"
+                            [attr.rotation]="(part.rotation[0].x != null ? part.rotation[0].x : '')+' '+(part.rotation[0].y != null ? part.rotation[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
+                            [attr.scale]="(part.scale[0].x != null ? part.scale[0].x : '')+' '+(part.scale[0].y != null ? part.scale[0].y : '')+' '+(part.scale[0].z != null ? part.scale[0].z : '')"
+                        > 
+                    <ng-container   *ngFor="let f of char.figures">
+                        <ng-container   *ngIf="f.active == true">
+                            <a-animation    attribute="position"
+                                            [attr.to]="(part.position[f.id].x != null ? part.position[f.id].x : '')+' '+(part.position[f.id].y != null ? part.position[f.id].y : '')+' '+(part.position[f.id].z != null ? part.position[f.id].z : '')"
+                                            dur="5000">
+                            </a-animation>
+                            <a-animation    attribute="rotation"
+                                            [attr.to]="(part.rotation[f.id].x != null ? part.rotation[f.id].x : '')+' '+(part.rotation[f.id].y != null ? part.rotation[f.id].y : '')+' '+(part.rotation[f.id].z != null ? part.rotation[f.id].z : '')"
+                                            dur="5000">
+                            </a-animation>
+                            <a-animation    attribute="scale"
+                                            [attr.to]="(part.scale[f.id].x != null ? part.scale[f.id].x : '')+' '+(part.scale[f.id].y != null ? part.scale[f.id].y : '')+' '+(part.scale[f.id].z != null ? part.scale[f.id].z : '')"
+                                            dur="5000">
+                            </a-animation>
+                        </ng-container>
+                    </ng-container>
+                </a-entity>
+            </ng-container>
+          </ng-container>
+        </ng-container>
       
-  
 
-        <!--Kamera-->
-        <a-entity position="0.7 1 6" id="Kamera">
-          <a-camera>
-            <!--<a-box height="1" depth="1" width="1" color="black" position="1 1 1">          
-            </a-box>-->
-            <a-entity cursor="fuse: true; fuseTimeout: 0"
-              position="0 0 -1"
-              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-              material="color: white; shader: flat">
-            </a-entity>
-          </a-camera>   
-        </a-entity>
 
-    
 
-        <a-light id="the_spot" type="spot" color="#FFF" position="0 10 0" [attr.intensity]="intensity" >
-          <!--<a-animation attribute="intensity" to="0.5" begin="4000" dur="3000"></a-animation>-->
-        </a-light>
+        <!--     
+      <a-light id="the_spot" type="spot" color="#FFF" position="0 10 0" intensity="0" >
+      </a-light>
+     
+      
+      <a-light id="BasicLight" type="ambient" color="#FFF" intensity="1" position="0 0 0">
+      </a-light>
+        -->
+
        
-        <!--Allgemeines Licht-->
-        <a-light type="ambient" color="#FFF" [attr.intensity]="intensity" >
-          <!--<a-animation attribute="intensity" to="0.4" dur="5000"></a-animation>-->
-        </a-light>
       </a-scene>
