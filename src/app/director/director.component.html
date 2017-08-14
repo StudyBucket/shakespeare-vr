@@ -1,13 +1,11 @@
 <h2>Directors Desk</h2>
 <hr>
-<div>
-
+<div style="height: 500px; max-height: 500px; overflow: scroll;">
 	<div class="list-group-item disabled">
 		<h4 class="list-group-item-heading"> 
 		Characters
 		</h4>
 	</div> 
-
 	<ng-container *ngFor="let char of characters">
 		<div class="list-group-item" *ngIf="char.options.ctrl == true">
 			<h4 class="list-group-item-heading">
@@ -16,12 +14,12 @@
 				<small>
 					<input 	style="display: inline;" 
 									type="checkbox" 
+									style="cursor:pointer;"
 									[attr.name]="char.uid" 
 									[attr.id]="char.uid" 
 									[checked]="char.options.toggled" 
 									(change)="char.options.toggled = !char.options.toggled">
 				</small>
-
 				<ul>
 					<ng-container *ngFor="let f of char.figures">
 							<li>
@@ -29,6 +27,7 @@
 									{{ f.title }} 
 									<input 	style="display: inline;" 
 													type="radio" 
+													style="cursor:pointer;"
 													[attr.name]="char.uid+'figure'"
 													[value]="f.id" 
 													(change)="f.active = !f.active"
@@ -41,7 +40,6 @@
 			</h4>
 			</div>
 	</ng-container>
-
 	<div class="list-group-item disabled">
 		<h4 class="list-group-item-heading"> 
 		Sounds
@@ -49,20 +47,43 @@
 	</div>
 	<div class="list-group-item">
 		<ol>
-				<ng-container *ngFor="let s of sounds">
-					<span 	class="badge badge-pill badge-default"
+			<ng-container *ngFor="let s of sounds"><!-- general sounds -->
+				<ng-container *ngIf="s.type == 'general'">
+					<span 	[attr.class]="'btn btn-xs btn-'+[s.color]"
 									(click)="playSound(s.src)"
+									style="cursor:pointer;"
 					>{{s.title}}</span>			
 				</ng-container>
-			</ol>	
+			</ng-container>
+		</ol>	
+		<ol>
+			<ng-container *ngFor="let s of sounds"><!-- regular text -->
+				<ng-container *ngIf="s.type == 'roles_std'">
+					<span 	[attr.class]="'btn btn-xs btn-'+[s.color]"
+									(click)="playSound(s.src)"
+									style="cursor:pointer;"
+					>{{s.title}}</span>			
+				</ng-container>
+			</ng-container>
+		</ol>	
+		<ol>
+			<ng-container *ngFor="let s of sounds"><!-- text (roles swapped) -->
+				<ng-container *ngIf="s.type == 'roles_swapped'">
+					<span 	[attr.class]="'btn btn-xs btn-'+[s.color]"
+									(click)="playSound(s.src)"
+									style="cursor:pointer;"
+					>{{s.title}}</span>			
+				</ng-container>
+			</ng-container>
+		</ol>	
 	</div>
-
 	<div class="list-group-item disabled">
 		<h4 class="list-group-item-heading"> 
 		Set Items
 		</h4>
 	</div>
-
+	<!-- drop controls  -->
+	<!-- - - - -  - - - -->
 	<ng-container *ngFor="let o of drpo">
 		<div class="list-group-item" *ngIf="o.options.ctrl == true">
 			<h4 class="list-group-item-heading">
@@ -91,8 +112,6 @@
 									(change)="o.options.active = !o.options.active"
 									[attr.checked]="o.options.active" >
 				</small>
-				
-
 				<ng-container *ngIf="o.type == 'light'">
 						<input 	[attr.id]="o.uid+'-range'"
 										type="range" 
@@ -100,39 +119,44 @@
 										max="5" 
 										step="0.25"
 										[value]="o.light.intensity"
-										(change)="o.light.intensity = $event.target.value">
+										(change)="o.light.intensity = $event.target.value"
+										style="cursor:pointer;">
 
 						<label style="color: #ffffff; background-color: lightgrey;">W <input 	style="display: inline;" 
 										type="radio" 
 										[attr.name]="o.uid+'-color'"
 										value="#ffffff" 
-										(change)="o.light.color = $event.target.value"></label>
+										(change)="o.light.color = $event.target.value"
+										style="cursor:pointer;"></label>
 
 						<label style="color: #ffe162; background-color: lightgrey;">Y <input 	style="display: inline;" 
 										type="radio" 
 										[attr.name]="o.uid+'-color'"
 										value="#ffe162" 
-										(change)="o.light.color = $event.target.value"></label>
+										(change)="o.light.color = $event.target.value"
+										style="cursor:pointer;"></label>
 
 						<label style="color: #df1a42; background-color: lightgrey;">R <input 	style="display: inline;" 
 										type="radio" 
 										[attr.name]="o.uid+'-color'"
 										value="#df1a42" 
-										(change)="o.light.color = $event.target.value"></label>
+										(change)="o.light.color = $event.target.value"
+										style="cursor:pointer;"></label>
 
 						<label style="color: #010B65; background-color: lightgrey;">B <input 	style="display: inline;" 
 										type="radio" 
 										[attr.name]="o.uid+'-color'"
 										value="#010B65" 
-										(change)="o.light.color = $event.target.value"></label>
+										(change)="o.light.color = $event.target.value"
+										style="cursor:pointer;"></label>
 
 						<label style="color: #6bfe00; background-color: lightgrey;">G <input 	style="display: inline;" 
 										type="radio" 
 										[attr.name]="o.uid+'-color'"
 										value="#6bfe00" 
-										(change)="o.light.color = $event.target.value"></label>
+										(change)="o.light.color = $event.target.value"
+										style="cursor:pointer;"></label>
 				</ng-container>
-
 				<ng-container *ngIf="o.animation != null">
 						<ol *ngFor="let a of o.animation">
 								<label>{{a.title}} <input 	style="display: inline;" 
@@ -140,83 +164,12 @@
 									[attr.name]="o.uid+'-'+a.title" 
 									[attr.id]="o.uid+'-'+a.title" 
 									[checked]="a.state" 
-									(change)="a.state = !a.state"></label>	
+									(change)="a.state = !a.state"
+									style="cursor:pointer;"></label>	
 						</ol>
 				</ng-container>
 
 			</h4>
 			</div>
 	</ng-container>
-	
-	<!--
-	<div class="list-group-item disabled">
-		<h4 class="list-group-item-heading"> 
-		Personen
-		</h4>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span> Julia <small>(Flying)</small></h4>
-
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Die</a>
-    <a href="#" class="label label-default">Talk</a>
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Harlem Shake</a>
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Fly</a>
-    <a href="#" class="label label-default">Test</a>
-    <a href="#" class="label label-default">Cry</a>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span> Romeo <small>(standby)</small></h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-
-	<div class="list-group-item disabled">
-		<h4 class="list-group-item-heading"> 
-		Licht
-		</h4>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-record"></span> Spot <small>(off)</small></h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-lamp"></span> Ambient Light <small>(on)</small></h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-
-	<div class="list-group-item disabled">
-		<h4 class="list-group-item-heading"> 
-		Kamera
-		</h4>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-facetime-video"></span> Kamera 1 <small>(active)</small></h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-
-	<div class="list-group-item disabled">
-		<h4 class="list-group-item-heading"> 
-		Requisiten
-		</h4>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tree-deciduous"></span> Baum</h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-
-	<div class="list-group-item">
-		<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-tree-deciduous"></span> Balkon</h4>
-    <p class="list-group-item-text">...</p>
-	</div>
-	-->
 </div>

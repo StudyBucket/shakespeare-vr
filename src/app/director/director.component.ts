@@ -11,6 +11,7 @@ export class DirectorComponent implements OnInit {
 	private drpo;
 	private characters;
   private sounds;
+  private audio = new Audio();
 
   constructor(private drpoS: drpoService) { 
    	this.drpo = drpoS.drpo;
@@ -22,9 +23,8 @@ export class DirectorComponent implements OnInit {
   }
 
   playSound(src: string){
-    var audio = new Audio();
-    audio.src = '../../assets/' + src;
-    audio.load();
-    audio.play();
+    this.audio.src = '../../assets/' + src;
+    this.audio.load();
+    this.audio.play();
   }
 }

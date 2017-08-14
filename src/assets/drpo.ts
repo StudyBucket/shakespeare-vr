@@ -1,4 +1,58 @@
 export const DigitalRepresentedPhysicalObjects: [any] = [{
+  "uid": "julia",
+  "type": "object",
+  "title": "Julia",
+  "comment": "",
+  "options": { "toggled": true, "ctrl": true },
+  "form": { "width":  null, "height": null,  "depth":  null, },
+  "appearance": { "mtl": "objects/Julia/julia.mtl", "obj": "objects/Julia/julia.obj", "color": "null" },
+  "position": [
+    { "x": "7", "y": "7.3", "z": "-14.471" }
+  ],
+  "rotation": [
+    { "x": "0", "y": "-53.858", "z": "0"}
+  ],
+  "scale": [
+    { "x": "0.200", "y": "0.200", "z": "0.200" }
+  ],
+  "animation": [
+    { 
+      "title": "turn-back",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "position", "to": "7 7.3 -14.471", "dur": "1000" },
+        { "attribute": "rotation", "to": "0 -233.858 0", "dur": "1000" }
+      ]
+    },
+    { 
+      "title": "std",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "position", "to": "7 7.3 -14.471", "dur": "1000" },
+        { "attribute": "rotation", "to": "0 -53.858 0", "dur": "1000" }
+      ]
+    },
+    { 
+      "title": "fly",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "position", "to": "7 10 -14.471", "dur": "1000" },
+        { "attribute": "rotation", "to": "360 -53.858 0", "dur": "1000" }
+      ]
+    },{ 
+      "title": "land",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "position", "to": "7 7.3 -14.471", "dur": "1000" },
+        { "attribute": "rotation", "to": "-360 -53.858 0", "dur": "1000" }
+      ]
+    }
+  ]
+},{
   "uid": "curtain-left",
   "type": "box",
   "title": "The left curtain.",
@@ -80,10 +134,18 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   ],
   "animation": [
     { 
-      "title": "animateOpen", 
+      "title": "animateOpen",
+      "autostart": false, 
       "state": false,
       "changes": [
-        { "attribute": "width", "to": "5", "dur": "5000" }
+        { "attribute": "width", "to": "5", "dur": "4000" }
+      ]
+    }, { 
+      "title": "animateClose",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "width", "to": "24", "dur": "6000" }
       ]
     }
   ]
@@ -734,6 +796,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "position": [
     { "x": "0.7", "y": "3", "z": "39.315"},
   ],
+  "rotation":[{ "x":null, "y":null, "z":null }],
   "animation": [
     { 
       "title": "moveForward",
@@ -750,45 +813,40 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
   "title": "Camera 1",
   "comment": "null",
   "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
-  "position": [
-    { "x": "0.7", "y": "3", "z": "6"},
-  ]
+  "position": [{ "x": "0.7", "y": "3", "z": "6"},],
+  "rotation":[{ "x":null, "y":null, "z":null }]
 },{
   "uid": "camera2",
   "type": "camera",
   "title": "Camera 2",
   "comment": "null",
   "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
-  "position": [
-    { "x": "7.1", "y": "7.2", "z": "-15.4"},
-  ]
+  "position": [{ "x": "7.1", "y": "7.2", "z": "-15.4"},],
+  "rotation":[{ "x":"0", "y":"120", "z":"0" },]
 },{
   "uid": "camera3",
   "type": "camera",
   "title": "Camera 3",
   "comment": "null",
   "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
-  "position": [
-    { "x": "0", "y": "2.918", "z": "-12.5"},
-  ]
+  "position": [{ "x": "0", "y": "2.918", "z": "-12.5"},],
+  "rotation":[{ "x":"0", "y":"-70", "z":"0" },]
 },{
   "uid": "camera4",
   "type": "camera",
   "title": "Camera 4",
   "comment": "null",
   "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
-  "position": [
-    { "x": "0.7", "y": "10", "z": "6"},
-  ]
+  "position": [{ "x": "0.7", "y": "10", "z": "6"},],
+  "rotation":[{ "x":null, "y":null, "z":null }]
 },{
   "uid": "camera5",
   "type": "camera",
   "title": "Camera 5",
   "comment": "null",
   "options": { "toggled": true, "ctrl": true, "intesity": null, "active": false },
-  "position": [
-    { "x": "0.7", "y": "10", "z": "6"},
-  ]
+  "position": [ { "x": "0.7", "y": "10", "z": "6"},],
+  "rotation":[{ "x":null, "y":null, "z":null },], 
 },{
   "uid": "the_spot",
   "type": "light",
@@ -799,7 +857,7 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
     { "x": "0", "y": "10", "z": "0"},
   ],
   "light": {
-    "intensity": "1.0", 
+    "intensity": "0.5", 
     "color": "#FFF",
     "type": "spot"
   }
@@ -818,23 +876,78 @@ export const DigitalRepresentedPhysicalObjects: [any] = [{
     "type": "ambient"
   },
 },{
-  "uid": "julia",
+  "uid": "door-right",
   "type": "object",
-  "title": "The balcony",
+  "title": "The right door.",
   "comment": "",
-  "options": { "toggled": true, "ctrl": false },
+  "options": { "toggled": true, "ctrl": true },
   "form": { "width":  null, "height": null,  "depth":  null, },
-  "appearance": { "mtl": "objects/Julia/julia.mtl", "obj": "objects/Julia/julia.obj", "color": "null" },
+  "appearance": { "mtl": "objects/Door/door.mtl", "obj": "objects/Door/door.obj", "color": "null" },
   "position": [
-    { "x": "5.987", "y": "7.506", "z": "-11.471" }
+    { "x": "7.5", "y": "7.0", "z": "20.0" }
   ],
   "rotation": [
-    { "x": "0", "y": "-53.858", "z": "0"}
+    { "x": "0", "y": "90", "z": "0"}
   ],
   "scale": [
-    { "x": "0.200", "y": "0.200", "z": "0.200" }
+    { "x": "0.4", "y": "0.5", "z": "0.5" }
+  ],
+  "animation": [
+    { 
+      "title": "animateOpen",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "rotation", "to": "0 180 0", "dur": "4000" }
+      ]
+    }, { 
+      "title": "animateClose",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "rotation", "to": "0 90 0", "dur": "4000" }
+      ]
+    }
+  ]
+},{
+  "uid": "door-left",
+  "type": "object",
+  "title": "The left door.",
+  "comment": "",
+  "options": { "toggled": true, "ctrl": true },
+  "form": { "width":  null, "height": null,  "depth":  null, },
+  "appearance": { "mtl": "objects/Door/door.mtl", "obj": "objects/Door/door.obj", "color": "null" },
+  "position": [
+    { "x": "-7.5", "y": "7.0", "z": "20.0" }
+  ],
+  "rotation": [
+    { "x": "0", "y": "-90", "z": "0"}
+  ],
+  "scale": [
+    { "x": "0.4", "y": "0.5", "z": "0.5" }
+  ],
+  "animation": [
+    { 
+      "title": "animateOpen",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "rotation", "to": "0 -180 0", "dur": "4000" }
+      ]
+    }, { 
+      "title": "animateClose",
+      "autostart": false, 
+      "state": false,
+      "changes": [
+        { "attribute": "rotation", "to": "0 -90 0", "dur": "4000" }
+      ]
+    }
   ]
 }];
+
+
+
+
 
 
 

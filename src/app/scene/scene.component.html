@@ -1,6 +1,5 @@
-<h2>Scene Title</h2>
+<h2>Romeo &amp; Julia - Act 2, Scene 2</h2>
 <hr>
-
     <!--Preloader-->
     <div id="wrapper" #preloader>
         <div id="timer"></div>
@@ -11,46 +10,37 @@
             <img src="assets/bilder/titelbild2.png" width="100%" height="100%">
         </div>
     </div>
-
-  <a-scene embedded id="scene" style="height: 100%;" #one>
-    <a-assets> 
-        <ng-container *ngFor="let o of drpo">
-          <ng-container *ngIf="o.options.toggled == true && o.appearance != null">
-            <ng-container *ngIf="o.appearance.material">
-                <img [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.material">
+    <a-scene embedded id="scene" style="height: 500px; max-height: 500px;" #one>
+        <a-assets> 
+            <!-- drop assets for simple objects and geometric forms -->
+            <ng-container *ngFor="let o of drpo">
+              <ng-container *ngIf="o.options.toggled == true && o.appearance != null">
+                <ng-container *ngIf="o.appearance.material">
+                    <img [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.material">
+                </ng-container>
+                <ng-container *ngIf="o.appearance.obj">
+                    <a-asset-item [id]="o.uid+'-obj'" [attr.src]="'../../assets/'+o.appearance.obj"></a-asset-item>
+                    <a-asset-item [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.mtl"></a-asset-item> 
+                </ng-container>
+              </ng-container>   
             </ng-container>
-            <ng-container *ngIf="o.appearance.obj">
-                <a-asset-item [id]="o.uid+'-obj'" [attr.src]="'../../assets/'+o.appearance.obj"></a-asset-item>
-                <a-asset-item [id]="o.uid+'-mtl'" [attr.src]="'../../assets/'+o.appearance.mtl"></a-asset-item> 
+            <!-- drop assets for characters -->
+            <ng-container *ngFor="let char of characters">
+              <ng-container *ngIf="char.options.toggled == true">  
+                <ng-container *ngFor="let part of char.parts">
+                    <ng-container *ngIf="part.appearance.obj">
+                        <a-asset-item [id]="char.uid+'_'+part.title+'-obj'" [attr.src]="'../../assets/'+part.appearance.obj"></a-asset-item>
+                        <a-asset-item [id]="char.uid+'_'+part.title+'-mtl'" [attr.src]="'../../assets/'+part.appearance.mtl"></a-asset-item> 
+                    </ng-container>
+                </ng-container>
+              </ng-container>
             </ng-container>
-          </ng-container>   
-        </ng-container>
+        </a-assets>
 
-        <ng-container *ngFor="let char of characters">
-          <ng-container *ngIf="char.options.toggled == true">  
-            <ng-container *ngFor="let part of char.parts">
-                <ng-container *ngIf="part.appearance.obj">
-                <a-asset-item [id]="char.uid+'_'+part.title+'-obj'" [attr.src]="'../../assets/'+part.appearance.obj"></a-asset-item>
-                <a-asset-item [id]="char.uid+'_'+part.title+'-mtl'" [attr.src]="'../../assets/'+part.appearance.mtl"></a-asset-item> 
-            </ng-container>
-            </ng-container>
-          </ng-container>
-        </ng-container>
-
-       
-         <!--Julia-Objekt-->      <a-asset-item id="julia-obj" src="../../assets/objects/Julia/julia.obj"></a-asset-item>
-         <!--Julia-Material-->    <a-asset-item id="julia-mtl" src="../../assets/objects/Julia/julia.mtl"></a-asset-item>
-         <!--Vorhand-IMG-->       <img id="curtain" src="../../assets/materials/curtain.jpg">
-         <!--Buehnenhintergrund--><img id="background" src="../../assets/materials/background.png">
-         <!--Applause-Sound-->     <audio id="ApplauseSound" src="../../assets/sound/Applause/crowd_applause.mp3"></audio>
-         <!--LowApplause-Sound-->  <audio id="LowApplauseSound" src="../../assets/sound/Applause/hand_claps.mp3"></audio>       
-         <!--Boo-Sound-->          <audio id="BooSound" src="../../assets/sound/Applause/boo.mp3"></audio>
-    </a-assets>
-        <!-- TEST -->
-
+        <!-- loop through all simple objects and geometric forms -->
         <ng-container *ngFor="let o of drpo">
           <ng-container *ngIf="o.options.toggled == true">  
-
+          <!-- -->
             <a-box *ngIf="o.type == 'box'"
                     [id]="o.uid"
                     [attr.width]="o.form.width"
@@ -75,8 +65,7 @@
                         </ng-container>
                     </ng-container>
             </a-box>
-
-
+            <!-- -->
             <a-plane *ngIf="o.type == 'plane'"
                     [id]="o.uid"
                     [attr.width]="o.form.width"
@@ -89,22 +78,7 @@
                     [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                     >     
             </a-plane>
-
-
-            <a-plane *ngIf="o.type == 'plane'"
-                    [id]="o.uid"
-                    [attr.width]="o.form.width"
-                    [attr.height]="o.form.height" 
-                    [attr.depth]="o.form.depth"  
-                    [attr.material]="'src: #'+o.uid+'-mtl'" 
-                    [attr.color]="o.appearance.color" 
-                    [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
-                    [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
-                    [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
-                    >     
-            </a-plane>
-
-
+            <!-- -->
             <a-entity   *ngIf="o.type == 'object'"
                         [id]="o.uid"
                         [attr.obj-model]="'obj: #' + o.uid + '-obj; mtl: #' + o.uid + '-mtl'" 
@@ -112,11 +86,23 @@
                         [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                         [attr.scale]="(o.scale[0].x != null ? o.scale[0].x : '')+' '+(o.scale[0].y != null ? o.scale[0].y : '')+' '+(o.scale[0].z != null ? o.scale[0].z : '')"
                     > 
+                    <ng-container *ngIf="o.animation">
+                        <ng-container *ngFor="let a of o.animation">
+                            <ng-container *ngIf="a.state == true || a.autostart == true">
+                                <a-animation    *ngFor="let c of a.changes"
+                                                [attr.attribute]="c.attribute" 
+                                                [attr.to]="c.to" 
+                                                [attr.dur]="c.dur">
+                                                [attr.delay]="(c.delay != null ? c.delay : '0')"
+                                </a-animation>   
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
             </a-entity>
-
-
+            <!-- drop cameras -->
             <a-entity   *ngIf="o.type == 'camera'"
                         [attr.position]="(o.position[0].x != null ? o.position[0].x : '')+' '+(o.position[0].y != null ? o.position[0].y : '')+' '+(o.position[0].z != null ? o.position[0].z : '')"
+                        [attr.rotation]="(o.rotation[0].x != null ? o.rotation[0].x : '')+' '+(o.rotation[0].y != null ? o.rotation[0].y : '')+' '+(o.rotation[0].z != null ? o.rotation[0].z : '')"
                     >
                 <a-camera   [id]="o.uid"
                             [attr.active]="o.options.active"
@@ -135,7 +121,7 @@
                     </ng-container>
                 </a-camera>   
             </a-entity>
-
+            <!-- drop lights -->
             <a-light    *ngIf="o.type == 'light'"
                         [id]="o.uid" 
                         [attr.type]="o.light.type"
@@ -148,48 +134,98 @@
           </ng-container>
         </ng-container>
 
-
+        <!-- drop characters by loop -->
         <ng-container *ngFor="let char of characters">
           <ng-container *ngIf="char.options.toggled == true">  
+            <!-- drop separate parts of character -->
             <ng-container *ngFor="let part of char.parts">
-                <a-entity   [id]="char.uid+'_'+part.title"
-                            [attr.obj-model]="'obj: #' + char.uid+'_'+part.title + '-obj; mtl: #' + char.uid+'_'+part.title + '-mtl'" 
+            <!-- part is object -->
+                <ng-container *ngIf="part.type == 'object'">
+                    <a-entity   [id]="char.uid+'_'+part.title"
+                                [attr.obj-model]="'obj: #' + char.uid+'_'+part.title + '-obj; mtl: #' + char.uid+'_'+part.title + '-mtl'" 
+                                [attr.position]="(part.position[0].x != null ? part.position[0].x : '')+' '+(part.position[0].y != null ? part.position[0].y : '')+' '+(part.position[0].z != null ? part.position[0].z : '')"
+                                [attr.rotation]="(part.rotation[0].x != null ? part.rotation[0].x : '')+' '+(part.rotation[0].y != null ? part.rotation[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
+                                [attr.scale]="(part.scale[0].x != null ? part.scale[0].x : '')+' '+(part.scale[0].y != null ? part.scale[0].y : '')+' '+(part.scale[0].z != null ? part.scale[0].z : '')"
+                            > 
+                        <ng-container   *ngFor="let f of char.figures">
+                            <ng-container   *ngIf="f.active == true">
+                                <a-animation    attribute="position"
+                                                [attr.to]="(part.position[f.id].x != null ? part.position[f.id].x : '')+' '+(part.position[f.id].y != null ? part.position[f.id].y : '')+' '+(part.position[f.id].z != null ? part.position[f.id].z : '')"
+                                                dur="5000">
+                                </a-animation>
+                                <a-animation    attribute="rotation"
+                                                [attr.to]="(part.rotation[f.id].x != null ? part.rotation[f.id].x : '')+' '+(part.rotation[f.id].y != null ? part.rotation[f.id].y : '')+' '+(part.rotation[f.id].z != null ? part.rotation[f.id].z : '')"
+                                                dur="5000">
+                                </a-animation>
+                                <a-animation    attribute="scale"
+                                                [attr.to]="(part.scale[f.id].x != null ? part.scale[f.id].x : '')+' '+(part.scale[f.id].y != null ? part.scale[f.id].y : '')+' '+(part.scale[f.id].z != null ? part.scale[f.id].z : '')"
+                                                dur="5000">
+                                </a-animation>
+                            </ng-container>
+                        </ng-container>
+                    </a-entity>
+                </ng-container>
+                <!-- part is box -->
+                <ng-container *ngIf="part.type == 'box'">
+                    <a-box  [id]="char.uid+'_'+part.title"
+                            [attr.width]="part.form.width"
+                            [attr.height]="part.form.height" 
+                            [attr.depth]="part.form.depth"  
+                            [attr.color]="part.appearance.color" 
                             [attr.position]="(part.position[0].x != null ? part.position[0].x : '')+' '+(part.position[0].y != null ? part.position[0].y : '')+' '+(part.position[0].z != null ? part.position[0].z : '')"
                             [attr.rotation]="(part.rotation[0].x != null ? part.rotation[0].x : '')+' '+(part.rotation[0].y != null ? part.rotation[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
-                            [attr.scale]="(part.scale[0].x != null ? part.scale[0].x : '')+' '+(part.scale[0].y != null ? part.scale[0].y : '')+' '+(part.scale[0].z != null ? part.scale[0].z : '')"
-                        > 
-                    <ng-container   *ngFor="let f of char.figures">
-                        <ng-container   *ngIf="f.active == true">
-                            <a-animation    attribute="position"
-                                            [attr.to]="(part.position[f.id].x != null ? part.position[f.id].x : '')+' '+(part.position[f.id].y != null ? part.position[f.id].y : '')+' '+(part.position[f.id].z != null ? part.position[f.id].z : '')"
-                                            dur="5000">
-                            </a-animation>
-                            <a-animation    attribute="rotation"
-                                            [attr.to]="(part.rotation[f.id].x != null ? part.rotation[f.id].x : '')+' '+(part.rotation[f.id].y != null ? part.rotation[f.id].y : '')+' '+(part.rotation[f.id].z != null ? part.rotation[f.id].z : '')"
-                                            dur="5000">
-                            </a-animation>
-                            <a-animation    attribute="scale"
-                                            [attr.to]="(part.scale[f.id].x != null ? part.scale[f.id].x : '')+' '+(part.scale[f.id].y != null ? part.scale[f.id].y : '')+' '+(part.scale[f.id].z != null ? part.scale[f.id].z : '')"
-                                            dur="5000">
-                            </a-animation>
-                        </ng-container>
-                    </ng-container>
-                </a-entity>
+                            [attr.scale]="(part.scale[0].x != null ? part.scale[0].x : '')+' '+(part.scale[0].y != null ? part.scale[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
+                            >     
+                            <ng-container   *ngFor="let f of char.figures">
+                                <ng-container   *ngIf="f.active == true">
+                                    <a-animation    attribute="position"
+                                                    [attr.to]="(part.position[f.id].x != null ? part.position[f.id].x : '')+' '+(part.position[f.id].y != null ? part.position[f.id].y : '')+' '+(part.position[f.id].z != null ? part.position[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                    <a-animation    attribute="rotation"
+                                                    [attr.to]="(part.rotation[f.id].x != null ? part.rotation[f.id].x : '')+' '+(part.rotation[f.id].y != null ? part.rotation[f.id].y : '')+' '+(part.rotation[f.id].z != null ? part.rotation[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                    <a-animation    attribute="scale"
+                                                    [attr.to]="(part.scale[f.id].x != null ? part.scale[f.id].x : '')+' '+(part.scale[f.id].y != null ? part.scale[f.id].y : '')+' '+(part.scale[f.id].z != null ? part.scale[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                </ng-container>
+                            </ng-container>
+                    </a-box>
+                </ng-container>
+                <!-- part is cylinder -->
+                <ng-container *ngIf="part.type == 'cylinder'">
+                    <a-box  [id]="char.uid+'_'+part.title"
+                            [attr.width]="part.form.width"
+                            [attr.height]="part.form.height" 
+                            [attr.depth]="part.form.depth" 
+                            [attr.radius]="part.form.radius"  
+                            [attr.color]="part.appearance.color" 
+                            [attr.position]="(part.position[0].x != null ? part.position[0].x : '')+' '+(part.position[0].y != null ? part.position[0].y : '')+' '+(part.position[0].z != null ? part.position[0].z : '')"
+                            [attr.rotation]="(part.rotation[0].x != null ? part.rotation[0].x : '')+' '+(part.rotation[0].y != null ? part.rotation[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
+                            [attr.scale]="(part.scale[0].x != null ? part.scale[0].x : '')+' '+(part.scale[0].y != null ? part.scale[0].y : '')+' '+(part.rotation[0].z != null ? part.rotation[0].z : '')"
+                            >     
+                            <ng-container   *ngFor="let f of char.figures">
+                                <ng-container   *ngIf="f.active == true">
+                                    <a-animation    attribute="position"
+                                                    [attr.to]="(part.position[f.id].x != null ? part.position[f.id].x : '')+' '+(part.position[f.id].y != null ? part.position[f.id].y : '')+' '+(part.position[f.id].z != null ? part.position[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                    <a-animation    attribute="rotation"
+                                                    [attr.to]="(part.rotation[f.id].x != null ? part.rotation[f.id].x : '')+' '+(part.rotation[f.id].y != null ? part.rotation[f.id].y : '')+' '+(part.rotation[f.id].z != null ? part.rotation[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                    <a-animation    attribute="scale"
+                                                    [attr.to]="(part.scale[f.id].x != null ? part.scale[f.id].x : '')+' '+(part.scale[f.id].y != null ? part.scale[f.id].y : '')+' '+(part.scale[f.id].z != null ? part.scale[f.id].z : '')"
+                                                    dur="5000">
+                                    </a-animation>
+                                </ng-container>
+                            </ng-container>
+                    </a-box>
+                </ng-container>
+
             </ng-container>
           </ng-container>
         </ng-container>
-      
-
-
-
-        <!--     
-      <a-light id="the_spot" type="spot" color="#FFF" position="0 10 0" intensity="0" >
-      </a-light>
-     
-      
-      <a-light id="BasicLight" type="ambient" color="#FFF" intensity="1" position="0 0 0">
-      </a-light>
-        -->
-
-       
       </a-scene>
