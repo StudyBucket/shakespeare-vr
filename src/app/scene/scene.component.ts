@@ -1,6 +1,4 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { ABox } from '../shared/abox.model';
-import { AEntity } from '../shared/aentity.model';
 import { Http } from '@angular/http';
 import { AFRAME } from 'aframe';
 import { drpoService } from '../shared/drpoService.service';
